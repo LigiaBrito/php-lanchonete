@@ -1,0 +1,14 @@
+fieldset {
+    border: 1px solid #adadad;
+    padding: 20px;
+    margin: 10px;
+    width: 100%;
+  }
+
+  legend {
+    width:auto; margin-bottom: 0px;
+  }
+
+  #dadosPedido{
+    background-color: #e4e4e4;   
+  }
