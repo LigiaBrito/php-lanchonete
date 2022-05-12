@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 08-Dez-2021 às 00:06
+-- Tempo de geração: 12-Maio-2022 às 03:29
 -- Versão do servidor: 10.4.20-MariaDB
 -- versão do PHP: 8.0.8
 
@@ -84,10 +84,8 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`id`, `nome`, `endereco`, `telefone`) VALUES
-(12, 'Pedro', 'Rua Serra de Bragança', '(50) 91449-1901'),
-(13, 'Giovanna', 'Rua Frederico Moura', '(36) 95353-6153'),
-(15, 'Rafael', 'Rua Tenente-Coronel Cardoso', '(67) 97855-8316'),
-(29, 'Fabiana', 'Rua Avenida Desembargador Moreira', '(69)99074-3406');
+(12, 'Pedro', 'Rua Alberto Soares 145', '(50) 91449-1901'),
+(36, 'Vicente André Augusto Santos', 'Rua Emilio Fonini', '(19)99156-6751');
 
 -- --------------------------------------------------------
 
@@ -137,10 +135,9 @@ CREATE TABLE `pedido` (
 --
 
 INSERT INTO `pedido` (`id`, `cod`, `nome`, `tipoLanche`, `adicionais`, `bebida`, `bebidaGelada`, `tipoBebida`, `data`, `observacoes`, `ckAdicionais`, `totalPedido`) VALUES
-(28, 1, 'Pedro', 'x-salada', 'Sim', 'Sim', 'Sim', 'Guarana', '2021-12-07', 'retirar a rucula', 'maionese', 21.75),
-(29, 2, 'Rafael', 'x-tudo', 'Sim', 'Sim', 'Não', 'Agua', '2021-12-09', 'pouco queijo', 'mostarda,ketchup', 30.7),
-(30, 3, 'Giovanna', 'x-frango', 'Sim', 'Sim', 'Sim', 'Coca', '2021-12-11', 'bastante alface', 'catupiry', 31.75),
-(31, 3, 'Fabiana', 'x-salada', 'Sim', 'Sim', 'Sim', 'Coca', '2021-12-17', 'nenhuma', 'maionese,mostarda,ketchup,catupiry', 38.45);
+(42, 0, 'Vicente André Augusto Santos', 'x-tudo', 'Sim', 'Sim', 'Sim', 'Guarana', '2022-05-11', 'pouca maionese', 'maionese,mostarda,ketchup', 39.55),
+(44, 2, 'Giovanna', 'x-frango', 'Sim', 'Sim', 'Sim', 'Guarana', '2022-05-11', 'pouco ketchup', 'maionese,ketchup,catupiry', 42.55),
+(45, 1, 'Vicente André Augusto Santos', 'x-tudo', 'Sim', 'Sim', 'Sim', 'Guarana', '2022-05-12', 'muita mostarda', 'mostarda,ketchup', 32.65);
 
 --
 -- Índices para tabelas despejadas
@@ -196,7 +193,7 @@ ALTER TABLE `bebida`
 -- AUTO_INCREMENT de tabela `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT de tabela `lanche`
@@ -208,7 +205,7 @@ ALTER TABLE `lanche`
 -- AUTO_INCREMENT de tabela `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
