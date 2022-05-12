@@ -15,7 +15,7 @@ require "header.php";
             <input type="text" class="form-control" id="endereco" name="endereco" value=<?php echo $endereco; ?>>
             <label for="telefone">Telefone</label>
             <input type="text" class="form-control" id="telefone" name="telefone" value=<?php echo $telefone; ?>>
-            <button type="reset" class="btn btn-secondary">Fechar</button>
+            <button type="reset" class="btn btn-secondary"><a href="index.php">Fechar</a></button>
             <button type="submit" class="btn btn-primary">Salvar</button>
         </form>
     </div>

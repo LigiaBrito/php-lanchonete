@@ -1,11 +1,3 @@
-<!-- 
-	Grupo 1
-	HUDSON THOMAS BORGES
-	LIGIA FERREIRA BRITO
-	NATHAN FONSECA DA SILVA
-	SONIA APARECIDA DE MORAES PERON OLIVEIRA
- -->
-
 <?php
 session_start();
 include "header.php";
@@ -18,7 +10,7 @@ require "../controller/lancheController.php";
 require "../controller/bebidaController.php";
 require "../controller/adicionalController.php";
 
-if($_POST){
+if ($_POST) {
 	$cod = $_POST['cod'];
 	$nome = $_POST['nomeCliente'];
 	$tipoLanche = $_POST['tipoLanche'];
@@ -33,17 +25,17 @@ if($_POST){
 	$totalPedido = 0;
 
 	$objL = new Lanche();
-	$totalPedido += $objL->mostrarPrecoPorNome($conexao,$tipoLanche);
+	$totalPedido += $objL->mostrarPrecoPorNome($conexao, $tipoLanche);
 
 	$objB = new Bebida();
-	$totalPedido += $objB->mostrarPrecoPorNome($conexao,$tipoBebida);
+	$totalPedido += $objB->mostrarPrecoPorNome($conexao, $tipoBebida);
 
 	$objA = new Adicional();
 
-	foreach($ckAdicionais as $tipoAdicional):
-		$totalPedido += $objA->mostrarPrecoPorNome($conexao,$tipoAdicional);
+	foreach ($ckAdicionais as $tipoAdicional) :
+		$totalPedido += $objA->mostrarPrecoPorNome($conexao, $tipoAdicional);
 	endforeach;
-	
+
 	if (isset($_POST['fecharPedido'])) {
 
 		$_SESSION['nomeCliente'] = $_POST['nomeCliente'];
@@ -52,11 +44,9 @@ if($_POST){
 		$_SESSION['data'] = $_POST['data'];
 		$_SESSION['ckAdicionais'] = $_POST['ckAdicionais'];
 		$_SESSION['totalPedido'] = $totalPedido;
-	
-	}elseif(isset($_POST['salvar'])){
-		
+
 		$objPedido = new Pedido();
-	
+
 		$objPedido->setCod($cod);
 		$objPedido->setNome($nome);
 		$objPedido->setTipoLanche($tipoLanche);
@@ -67,12 +57,12 @@ if($_POST){
 		$objPedido->setObservacoes($observacoes);
 		$objPedido->setCkAdicionais($ckAdicionais);
 		$objPedido->setData($data);
-	
-		
+
+
 		$objPedido->setTotalPedido($totalPedido);
-	
-		if(isset($_POST['codigoForm'])){
-			if($objPedido->inserirPedido($conexao, $objPedido) == false)
+
+		if (isset($_POST['codigoForm'])) {
+			if ($objPedido->inserirPedido($conexao, $objPedido) == false)
 				echo "Erro ao inserir!";
 		}
 	}
@@ -95,10 +85,6 @@ if($_POST){
 						<li class="nav-item">
 							<input type="submit" name="fecharPedido" value="Fechar Pedido" style="color:#25B6FF;" class="nav-link">
 						</li>
-						<li class="nav-item">
-							<input type="submit" name="salvar" value="Salvar" style="color:#25B6FF;" class="nav-link">
-						</li>
-
 						<li class="nav-item">
 							<div class="dropdown">
 								<a class="nav-link dropdown-toggle" href="http://example.com" id="dropdownMenuButton" data-toggle="dropdown">Cadastro</a>
@@ -133,15 +119,15 @@ if($_POST){
 						<legend>Dados</legend>
 						<div class="form-group row">
 							<label>Código de Pedido</label>
-							<input type="number" class="form-control" id="cod" name="cod" value="<?php if (isset($_POST['novoPedido'])) echo $novoCod ?>">
+							<input type="number" class="form-control" id="cod" name="cod" value="<?php if (isset($_POST['novoPedido'])) echo $novoCod; ?>">
 						</div>
 						<div class="form-group row">
 							<label>Nome do cliente</label>
 							<select class="form-control col-sm-11" id="nomeCliente" name="nomeCliente">
-								<?php  
-									while ($objcli = $dados->fetch_object()) { 
+								<?php
+								while ($objcli = $dados->fetch_object()) {
 								?>
-								<option><?php echo $objcli->nome; ?></option>
+									<option><?php echo $objcli->nome; ?></option>
 								<?php } ?>
 							</select>
 							<button href="#modalCliente" type="button" class="btn btn-md btn-outline-info" data-toggle="modal">+</button>
@@ -150,20 +136,22 @@ if($_POST){
 
 					<!-- Input de lanches -->
 					<div class="row">
-						<fieldset class="col">
-							<legend>Tipos de Lanche</legend>
-							<div class="form-group row">
-								<select class="form-control col-sm-10" id="tipoLanche" name="tipoLanche">
-									<?php 
-										while($objlan = $dadosL->fetch_object()) {
-									?>
-									<option><?php echo $objlan->nome; ?></option>
-									<?php } ?>
-								</select>
-								<button href="#modalLanche" type="button" class="btn btn-md btn-outline-info" data-toggle="modal">+</button>
-							</div>
-						</fieldset>
+						<div class="col">
+							<fieldset>
+								<legend>Tipos de Lanche</legend>
+								<div class="form-group row">
+									<select class="form-control col-sm-10" id="tipoLanche" name="tipoLanche">
+										<?php
+										while ($objlan = $dadosL->fetch_object()) {
+										?>
+											<option><?php echo $objlan->nome; ?></option>
+										<?php } ?>
+									</select>
+									<button href="#modalLanche" type="button" class="btn btn-md btn-outline-info" data-toggle="modal">+</button>
+								</div>
 
+							</fieldset>
+						</div>
 						<!-- Radio button de adicionais -->
 						<fieldset class="col">
 							<legend>Adicionais</legend>
@@ -193,11 +181,11 @@ if($_POST){
 								<legend>Tipos de Bebida</legend>
 								<div class="form-group row">
 									<select class="form-control col-sm-11" id="tipoBebida" name="tipoBebida">
-									<?php 
+										<?php
 										while ($objBeb = $dadosB->fetch_object()) {
-									?>
-									<option><?php echo $objBeb->nome; ?></option>
-									<?php } ?>
+										?>
+											<option><?php echo $objBeb->nome; ?></option>
+										<?php } ?>
 									</select>
 									<button href="#modalBebida" type="button" class="btn btn-md btn-outline-info" data-toggle="modal">+</button>
 								</div>
@@ -226,13 +214,13 @@ if($_POST){
 								<legend>Adicionais</legend>
 								<div class="form-group">
 									<?php
-										while ($objAdi = $dadosA->fetch_object()) {
+									while ($objAdi = $dadosA->fetch_object()) {
 									?>
-									<div class="checkbox">
-										<label>
-											<input type="checkbox" name="ckAdicionais[]" value="<?php echo $objAdi->nome; ?>"> <?php echo $objAdi->nome; ?>
-										</label>
-									</div>
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" name="ckAdicionais[]" value="<?php echo $objAdi->nome; ?>"> <?php echo $objAdi->nome; ?>
+											</label>
+										</div>
 									<?php } ?>
 								</div>
 							</fieldset>
@@ -266,7 +254,7 @@ if($_POST){
 																							echo "\nTipo Bebida: " . $tipoBebida;
 																							echo "\nObservações: " . $observacoes;
 																							echo "\nAdicionais escolhidos:";
-																							foreach($ckAdicionais as $valor):
+																							foreach ($ckAdicionais as $valor) :
 																								echo "\n " . $valor;
 																							endforeach;
 																							echo "\nTotal Do Pedido: " . $totalPedido;
